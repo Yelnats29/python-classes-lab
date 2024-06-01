@@ -41,9 +41,7 @@ class Game:
     def play_game(self):
         # Printing the Welcome Message
         print('Welcome to Tic-Tac-Toe!')
-        print('Player X starts the game.')
-        self.print_board()
-        self.print_message()
+        self.render()
 
 
 
@@ -60,27 +58,33 @@ class Game:
         """)
 
     def print_message(self):
-        if {self.tie} == True:
+        if self.tie == True:
             print("Tie game!")
-        elif {self.winner} != None:
+        elif self.winner != None:
             print(f"{self.winner} wins the game!")
         else:
             print(f"It's player {self.turn}'s turn!")
 
 
 
+    def render(self):
+        self.print_message()
+        # self.get_move()
+        self.print_board()
 
 
-
-
-
-
-
-
-
-
-
-
+# Step 4
+    def get_move(self):
+        while True:
+            move = input(f"Player {self.turn}, enter a valid move (example: A1): ").lower()
+            # This checks if the player's input (move) is a valid key in the board dictionary.
+            # This checks if the specified position on the board is currently unoccupied.
+            if move in self.board and self.board[move] is None:
+                # This line updates the game board by placing the current player's mark ('X' or 'O') in the specified position.
+                self.board[move] = self.turn
+                break
+            else:
+                print("Invalid move. Please try again with an accepted entry.")
 
 
 
