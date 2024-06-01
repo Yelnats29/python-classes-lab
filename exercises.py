@@ -43,6 +43,12 @@ class Game:
         print('Welcome to Tic-Tac-Toe!')
         self.render()
 
+        # while not self.winner and not self.tie:
+        #     self.get_move()
+        #     self.render()
+        #     # Check for a winner or a tie here (to be implemented later)
+        #     self.switch_turn()
+
 
 
 # Step 3:
@@ -86,6 +92,23 @@ class Game:
             else:
                 print("Invalid move. Please try again with an accepted entry.")
 
+# Step 5
+    def check_winner(self):
+        # First thing is to list all of the ways to win.
+        winning_combinations = [
+            ['a1', 'b1', 'c1'],  # Top row
+            ['a2', 'b2', 'c2'],  # Middle row
+            ['a3', 'b3', 'c3'],  # Bottom row
+            ['a1', 'a2', 'a3'],  # Left column
+            ['b1', 'b2', 'b3'],  # Middle column
+            ['c1', 'c2', 'c3'],  # Right column
+            ['a1', 'b2', 'c3'],  # Diagonal top-left to bottom-right
+            ['c1', 'b2', 'a3'],  # Diagonal top-right to bottom-left
+        ]
+        for combination in winning_combinations:
+            if self.board[combination[0]] and self.board[combination[0]] == self.board[combination[1]] == self.board[combination[2]]:
+                self.winner == self.turn
+                return
 
 
 
