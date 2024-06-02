@@ -41,16 +41,16 @@ class Game:
     def play_game(self):
         # Printing the Welcome Message
         print('Welcome to Tic-Tac-Toe!')
-        self.render()
-
         while not self.winner and not self.tie:
-            self.get_move()
-            self.check_winner()
-            self.check_tie()
-            self.render()
-
+            self.render()  # Render the current state of the game
+            self.get_move()  # Get the current player's move
+            self.check_winner()  # Check for a winner after the move
+            self.check_tie()  # Check for a tie after the move
             if not self.winner and not self.tie:
-                self.switch_turn()
+                self.switch_turn()  # Switch turns if the game continues
+        
+        # Render the final state at the end of the game
+        self.render()
 
 
 
@@ -69,7 +69,7 @@ class Game:
     def print_message(self):
         if self.tie == True:
             print("Tie game!")
-        elif self.winner != None:
+        elif self.winner:
             print(f"{self.winner} wins the game!")
         else:
             print(f"It's player {self.turn}'s turn!")
@@ -78,13 +78,13 @@ class Game:
 
     def render(self):
         self.print_message()
-        # self.get_move()
         self.print_board()
 
 
 # Step 4
     def get_move(self):
         while True:
+            # f or F allows you to include variables or expressions directly within the string.
             move = input(f"Player {self.turn}, enter a valid move (example: A1): ").lower()
             # This checks if the player's input (move) is a valid key in the board dictionary.
             # This checks if the specified position on the board is currently unoccupied.
@@ -110,14 +110,14 @@ class Game:
         ]
         for combination in winning_combinations:
             if self.board[combination[0]] and self.board[combination[0]] == self.board[combination[1]] == self.board[combination[2]]:
-                self.winner == self.turn
-                return
+                self.winner = self.turn
+                
             
 # Step 6
     def check_tie(self):
         # In Python, when you iterate over a dictionary, the loop variable (pos in this case) takes on each key of the dictionary one by one.
         if all(self.board[pos] is not None for pos in self.board) and not self.winner:
-            self.tie == True
+            self.tie = True
 
 # Step 7
     def switch_turn(self):
