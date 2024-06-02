@@ -43,11 +43,14 @@ class Game:
         print('Welcome to Tic-Tac-Toe!')
         self.render()
 
-        # while not self.winner and not self.tie:
-        #     self.get_move()
-        #     self.render()
-        #     # Check for a winner or a tie here (to be implemented later)
-        #     self.switch_turn()
+        while not self.winner and not self.tie:
+            self.get_move()
+            self.check_winner()
+            self.check_tie()
+            self.render()
+
+            if not self.winner and not self.tie:
+                self.switch_turn()
 
 
 
@@ -109,6 +112,17 @@ class Game:
             if self.board[combination[0]] and self.board[combination[0]] == self.board[combination[1]] == self.board[combination[2]]:
                 self.winner == self.turn
                 return
+            
+# Step 6
+    def check_tie(self):
+        # In Python, when you iterate over a dictionary, the loop variable (pos in this case) takes on each key of the dictionary one by one.
+        if all(self.board[pos] is not None for pos in self.board) and not self.winner:
+            self.tie == True
+
+# Step 7
+    def switch_turn(self):
+        self.turn ='O' if self.turn == 'X' else 'X'
+
 
 
 
